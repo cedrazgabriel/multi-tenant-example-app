@@ -1,6 +1,7 @@
+import { db } from "../../lib/db";
+
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
-import { db } from "../../lib/db";
 import { hash } from "bcryptjs";
 
 const schema = z.object({
