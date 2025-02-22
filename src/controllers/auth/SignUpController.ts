@@ -40,6 +40,16 @@ export class SignUpController {
                 name: user.name,
                 email: user.email,
                 password: hashedPassword,
+                organizations: {
+                    create: {
+                        role: "OWNER",
+                        organization: {
+                            create: {
+                                name: organization.name,
+                            }
+                        }
+                    }
+                }
             },
         })
 
@@ -51,7 +61,6 @@ export class SignUpController {
                 name: user.name,
                 email: user.email,
             },
-            organization,
         });
     }
 }
