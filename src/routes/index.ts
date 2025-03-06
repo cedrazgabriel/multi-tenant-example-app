@@ -2,6 +2,7 @@ import { FastifyPluginAsync } from "fastify";
 
 import { authRoutes } from "./auth";
 import { leadsRoutes } from "./leads";
+import { organizationsRoutes } from "./organizations";
 import { authenticationMiddleware } from "../middlewares/authenticationMiddleware";
 
 const publicRoutes: FastifyPluginAsync = async (fastify) => {
@@ -11,6 +12,7 @@ const publicRoutes: FastifyPluginAsync = async (fastify) => {
 const privateRoutes: FastifyPluginAsync = async (fastify) => {
     fastify.addHook("onRequest", authenticationMiddleware);
     fastify.register(leadsRoutes, { prefix: "/leads" });
+    fastify.register(organizationsRoutes, { prefix: "/organizations" });
 }
 
 
