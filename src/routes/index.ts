@@ -11,6 +11,7 @@ const publicRoutes: FastifyPluginAsync = async (fastify) => {
 
 const privateRoutes: FastifyPluginAsync = async (fastify) => {
     fastify.addHook("onRequest", authenticationMiddleware);
+
     fastify.register(leadsRoutes, { prefix: "/leads" });
     fastify.register(organizationsRoutes, { prefix: "/organizations" });
 }
