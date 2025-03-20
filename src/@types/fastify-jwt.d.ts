@@ -1,8 +1,7 @@
 import '@fastify/jwt'
-import { OrganizationRole } from '@prisma/client';
 
 declare module "@fastify/jwt" {
-    type Payload = { sub: string, organizationId: string, role: OrganizationRole };
+    type Payload = { sub: string };
 
     interface FastifyJWT {
         payload: Payload;

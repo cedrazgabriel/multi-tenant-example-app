@@ -17,7 +17,7 @@ export class SignInController {
             where: {
                 email
             },
-            select: { id: true, password: true, organizations: { where: { role: "OWNER" } } }
+            select: { id: true, password: true }
         })
 
         if (!user || !await compare(password, user.password)) {
@@ -26,18 +26,8 @@ export class SignInController {
             });
         }
 
-        const [organization] = user.organizations;
-
-        if (!organization) {
-            return reply.status(403).send({
-                message: "User is not a member of any organization",
-            });
-        }
-
         const accessToken = request.server.jwt.sign({
             sub: user.id,
-            organizationId: organization.organizationId,
-            role: organization.role,
         })
 
 
