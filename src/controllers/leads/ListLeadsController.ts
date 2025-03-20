@@ -4,7 +4,14 @@ import { db } from "../../lib/db";
 
 export class ListLeadsController {
     static async handler(request: FastifyRequest, reply: FastifyReply) {
-        const { organizationId } = request.user;
+
+        const organizationId = request.headers["x-org-id"]
+
+        if (!organizationId || typeof organizationId !== "string") {
+            return reply.status(403).send({
+                error: "Organization ID is required",
+            })
+        }
 
         const leads = await db.lead.findMany({
             where: {
