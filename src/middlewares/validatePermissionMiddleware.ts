@@ -28,6 +28,8 @@ export async function validatePermissionMiddleware(request: FastifyRequest, repl
         })
     }
 
+    request.organizationUser = organizationUser
+
    }
    catch {
     return reply.status(403).send({

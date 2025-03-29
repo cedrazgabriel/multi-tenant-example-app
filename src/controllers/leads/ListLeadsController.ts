@@ -5,7 +5,7 @@ import { db } from "../../lib/db";
 export class ListLeadsController {
     static async handler(request: FastifyRequest, reply: FastifyReply) {
 
-        const organizationId = request.headers["x-org-id"]
+        const { organizationId }  = request.organizationUser
 
         if (!organizationId || typeof organizationId !== "string") {
             return reply.status(403).send({
