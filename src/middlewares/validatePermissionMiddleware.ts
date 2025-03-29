@@ -15,7 +15,7 @@ export function validatePermissionMiddleware(requiredRoles?: OrganizationRole[])
 
     const { sub } = request.user
 
-    const organizationUser = await db.organizationUser.findUnique({
+    const organizationUser = request.organizationUser || await db.organizationUser.findUnique({
         where: {
             userId_organizationId: {
                 userId: sub,
